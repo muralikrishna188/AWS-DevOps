@@ -1,14 +1,5 @@
 # Hands-on Lab: Deploy, Update and Delete a Stack with AWS CloudFormation
 
-**Course:** DevOps on AWS – Intermediate
-**Duration:** about 70 minutes
-**Goal:** Write a CloudFormation template with parameters and outputs, deploy it as a stack, update it safely using a change set, and delete it (including fixing a delete failure).
-
----
-
-## What you will build
-
-A simple stack containing:
 
 | Resource | Purpose |
 |---|---|
