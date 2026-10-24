@@ -1,10 +1,5 @@
 # Hands-on Lab: CI/CD Pipeline with AWS CodePipeline
 
-**Course:** DevOps on AWS – Intermediate
-**Duration:** about 60 minutes
-**Goal:** Create a basic CI/CD pipeline that starts automatically on every code commit: GitHub (source), AWS CodeBuild (build and test), and Amazon S3 (deploy).
-
----
 
 ## What you will build
 
