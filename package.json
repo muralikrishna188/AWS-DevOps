@@ -1,0 +1,12 @@
+{
+  "name": "codebuild-demo",
+  "version": "1.0.0",
+  "description": "Sample app for the AWS CodeBuild lab",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node --test",
+    "build": "mkdir -p dist && cp app.js package.json dist/"
+  },
+  "license": "MIT"
+}
