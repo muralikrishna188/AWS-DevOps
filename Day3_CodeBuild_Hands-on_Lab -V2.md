@@ -1,8 +1,6 @@
 # Day 3 Hands-on Lab: Automated Build with AWS CodeBuild
 
-**Course:** DevOps on AWS – Intermediate
-**Duration:** about 45 minutes
-**Goal:** Run an automated build (install, test, package) for a ready-made Node.js application using AWS CodeBuild, and store the output as an artifact in S3.
+Run an automated build (install, test, package) for a ready-made Node.js application using AWS CodeBuild, and store the output as an artifact in S3.
 
 ---
 
