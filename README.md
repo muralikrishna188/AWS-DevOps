@@ -1,7 +1,7 @@
 # codebuild-demo
 
 Small Node.js sample application used in the **AWS CodeBuild** hands-on lab
-(DevOps on AWS – Intermediate).
+(DevOps on AWS – Intermediate)
 
 ## Project layout
 
