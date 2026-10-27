@@ -82,6 +82,17 @@ When CodeBuild runs inside a pipeline, CodePipeline controls where the artifact 
    - Service role: **New service role** (accept the suggested name)
 4. Choose **Next**.
 
+## Pipeline settings: execution mode
+
+The execution mode decides what happens when a new pipeline run starts while an earlier run is still in progress (for example, when you push two commits within a minute).
+
+| Mode | Behavior | Best for |
+|---|---|---|
+| **Superseded** | A newer run overtakes older ones. Waiting runs are dropped, so only the latest commit continues. | Typical CI/CD where only the newest code matters |
+| **Queued** | Runs go through in the order they were triggered, one after another, and none are skipped. | When every commit must be built and deployed in order |
+| **Parallel** | Runs start independently and at the same time, with no ordering. | Independent builds or tests where order doesn't matter |
+
+
 ---
 
 ## Step 3: Add the source stage (with commit trigger)
