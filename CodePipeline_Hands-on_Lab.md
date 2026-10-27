@@ -78,7 +78,7 @@ When CodeBuild runs inside a pipeline, CodePipeline controls where the artifact 
 3. **Pipeline settings**
    - Pipeline name: `codebuild-demo-pipeline`
    - Pipeline type: **V2**
-   - Execution mode: **Queued** (or **Superseded**; ask your instructor for the difference)
+   - Execution mode: **Queued** (or **Superseded**; )
    - Service role: **New service role** (accept the suggested name)
 4. Choose **Next**.
 
