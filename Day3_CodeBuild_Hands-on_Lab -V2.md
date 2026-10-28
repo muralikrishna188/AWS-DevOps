@@ -1,10 +1,8 @@
-# Day 3 Hands-on Lab: Automated Build with AWS CodeBuild
+# Build with AWS CodeBuild
 
 Run an automated build (install, test, package) for a ready-made Node.js application using AWS CodeBuild, and store the output as an artifact in S3.
 
 ---
-
-## What you will build
 
 ```
 Your GitHub fork ──► CodeBuild project ──► install → test → build ──► Artifact (zip) in S3
@@ -39,6 +37,20 @@ The sample application is already prepared for you. You do not need to write any
 
 > **Why fork?** CodeBuild needs a repository you own so it can connect to it and, later, receive webhooks. You cannot connect to someone else's repository.
 
+
+## Step  (optional): Run it locally first
+
+If you have Git and Node.js installed, confirm the app works on your machine.
+
+```bash
+git clone https://github.com/<your-username>/AWS-DevOps.git
+cd AWS-DevOps
+npm ci           # installs from package-lock.json (there are no dependencies)
+npm test         # both tests should pass
+npm run build    # creates the dist/ folder with app.js and package.json
+```
+
+If you skip this step, CodeBuild will do the same work for you in Step 6.
 ---
 
 ## Step 2: Understand the buildspec file
@@ -95,19 +107,6 @@ cache:
 
 ---
 
-## Step 3 (optional): Run it locally first
-
-If you have Git and Node.js installed, confirm the app works on your machine.
-
-```bash
-git clone https://github.com/<your-username>/AWS-DevOps.git
-cd AWS-DevOps
-npm ci           # installs from package-lock.json (there are no dependencies)
-npm test         # both tests should pass
-npm run build    # creates the dist/ folder with app.js and package.json
-```
-
-If you skip this step, CodeBuild will do the same work for you in Step 6.
 
 ---
 
