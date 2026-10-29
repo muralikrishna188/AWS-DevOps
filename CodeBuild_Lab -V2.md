@@ -38,9 +38,9 @@ The sample application is already prepared for you. You do not need to write any
 > **Why fork?** CodeBuild needs a repository you own so it can connect to it and, later, receive webhooks. You cannot connect to someone else's repository.
 
 
-## Step  (optional): Run it locally first
+## Step  
 
-If you have Git and Node.js installed, confirm the app works on your machine.
+If you have Git and Node.js installed, 
 
 ```bash
 git clone https://github.com/<your-username>/AWS-DevOps.git
