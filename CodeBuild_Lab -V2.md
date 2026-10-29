@@ -50,7 +50,7 @@ npm test         # both tests should pass
 npm run build    # creates the dist/ folder with app.js and package.json
 ```
 
-If you skip this step, CodeBuild will do the same work for you in Step 6.
+CodeBuild will do the same work for you in Step 6.
 ---
 
 ## Step 2: Understand the buildspec file
