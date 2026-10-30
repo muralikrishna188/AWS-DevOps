@@ -62,29 +62,18 @@ resource "aws_route_table_association" "web" {
   route_table_id = aws_route_table.public.id
 }
 
-# ---------- Security group ----------
+# ---------- Security group (allow all traffic) ----------
 resource "aws_security_group" "web" {
   name   = "web-sg"
   vpc_id = aws_vpc.main.id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # open to all - restrict to your IP later
-  }
+
   egress {
     from_port   = 0
     to_port     = 0
