@@ -1,8 +1,3 @@
-############################################
-# Web Tier Only on AWS (Ubuntu)
-# Only variables: access_key and secret_key
-############################################
-
 terraform {
   required_providers {
     aws = {
@@ -12,60 +7,44 @@ terraform {
   }
 }
 
-# ---------- Variables (credentials only) ----------
-variable "access_key" {
-  type      = string
-  sensitive = true
-}
-
-variable "secret_key" {
-  type      = string
-  sensitive = true
-}
-
 provider "aws" {
-  region     = "ap-south-1"
-  access_key = var.access_key
-  secret_key = var.secret_key
+  region = "us-east-1"
+  access_key = ""
+  secret_key = ""# credentials come from env vars or `aws configure`
 }
 
-# ---------- Network ----------
-resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
+resource "aws_vpc" "awsvpc01" {
+  cidr_block           = "10.86.0.0/16"
   enable_dns_hostnames = true
-  tags                 = { Name = "web-vpc" }
 }
 
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main.id
-  tags   = { Name = "web-igw" }
+resource "aws_internet_gateway" "awsintgtw01" {
+  vpc_id = aws_vpc.awsvpc01.id
 }
 
-resource "aws_subnet" "web" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.1.0/24"
+resource "aws_subnet" "awswebsubnet01" {
+  vpc_id                  = aws_vpc.awsvpc01.id
+  cidr_block              = "10.86.1.0/24"
   map_public_ip_on_launch = true
-  tags                    = { Name = "web-public-subnet" }
 }
 
-resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.main.id
+resource "aws_route_table" "awspublicroute" {
+  vpc_id = aws_vpc.awsvpc01.id
+
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
+    gateway_id = aws_internet_gateway.awsintgtw01.id
   }
-  tags = { Name = "web-public-rt" }
 }
 
 resource "aws_route_table_association" "web" {
-  subnet_id      = aws_subnet.web.id
-  route_table_id = aws_route_table.public.id
+  subnet_id      = aws_subnet.awswebsubnet01.id
+  route_table_id = aws_route_table.awspublicroute.id
 }
 
-# ---------- Security group (allow all traffic) ----------
-resource "aws_security_group" "web" {
-  name   = "web-sg"
-  vpc_id = aws_vpc.main.id
+resource "aws_security_group" "awswebsg" {
+  name   = "websg"
+  vpc_id = aws_vpc.awsvpc01.id
 
   ingress {
     from_port   = 0
@@ -82,16 +61,9 @@ resource "aws_security_group" "web" {
   }
 }
 
-# ---------- Web server ----------
-resource "aws_instance" "web" {
-  ami                    = "ami-REPLACE_WITH_UBUNTU_AMI_ID" # Ubuntu AMI for ap-south-1
+resource "aws_instance" "awswebsrvr" {
+  ami                    = "ami-02a9cdd4e98bc3c78"
   instance_type          = "t3.micro"
-  subnet_id              = aws_subnet.web.id
-  vpc_security_group_ids = [aws_security_group.web.id]
-  tags                   = { Name = "web-server" }
-}
-
-# ---------- Output ----------
-output "web_public_ip" {
-  value = aws_instance.web.public_ip
+  subnet_id              = aws_subnet.awswebsubnet01.id
+  vpc_security_group_ids = [aws_security_group.awswebsg.id]
 }
